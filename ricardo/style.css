@@ -1,0 +1,174 @@
+:root {
+    --neon-green: #00ff9d;
+    --dark-bg: #0a0a0f;
+    --module-bg: rgba(15, 25, 20, 0.8);
+    --border-color: rgba(0, 255, 157, 0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    color: var(--accent-rose);
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--primary-pink);
+    transition: all 0.3s ease;
+    z-index: 1000; /* Pour qu'il reste au-dessus de tout */
+}
+
+.btn-back:hover {
+    background-color: var(--accent-rose);
+    color: white;
+    transform: translateX(-5px); /* Petit effet de mouvement vers la gauche */
+    box-shadow: 0 6px 20px rgba(152, 169, 229, 0.4);
+}
+
+/* Ajustement pour mobile (pour éviter qu'il ne cache le texte) */
+@media (max-width: 800px) {
+    .btn-back {
+        position: relative; /* Repasse en flux normal sur petit écran */
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+        display: inline-flex;
+    }
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: #c0c0c0;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Effet Scanline (Lignes d'écran) */
+.crt-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 3px, 2px 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.main-frame {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Header & Photo Hexagonale */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.hexagon-wrapper {
+    width: 150px;
+    height: 150px;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    background: var(--neon-green);
+    padding: 3px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    background: #000;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    color: var(--neon-green);
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+.last-name { font-size: 1.5rem; letter-spacing: 10px; opacity: 0.7; }
+
+/* Modules (Cartes) */
+.data-module {
+    background: var(--module-bg);
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    position: relative;
+    animation: slideIn 0.5s ease-out both;
+}
+
+.module-header {
+    background: var(--border-color);
+    color: var(--neon-green);
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.module-body { padding: 20px; }
+
+/* Timeline & Grille */
+.tag { color: var(--neon-green); font-weight: bold; margin-right: 10px; }
+.event { margin-bottom: 10px; display: flex; gap: 15px; }
+.year { color: var(--neon-green); font-family: 'Orbitron'; }
+
+/* Tableaux avec barres de progression */
+.cyber-table { width: 100%; border-collapse: collapse; }
+.cyber-table th { text-align: left; font-size: 0.7rem; padding: 10px; opacity: 0.6; }
+.bar { height: 6px; background: #1a1a1a; width: 100%; border-radius: 3px; overflow: hidden; }
+.fill { height: 100%; background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
+
+/* Hobby Cards */
+.hobby-grid { display: flex; gap: 10px; }
+.hobby-card {
+    border: 1px solid var(--neon-green);
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.hobby-card:hover {
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+/* Animations */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); filter: blur(10px); }
+    to { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+.status-blink {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .profile-header { flex-direction: column; text-align: center; }
+    h1 { font-size: 2rem; }
+}
